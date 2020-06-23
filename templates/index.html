@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WeatherApp</title>
+    {% block title %}
+{#    <link rel="stylesheet" href='{% static 'CSS/style.css' %}'>#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    {% endblock %}
+<style>
+    .top{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        align: center;
+        alignment: center;
+        color: #FBFCFC  ;
+        background-color: #B2BABB;
+    }
+    .from{
+        padding-top: 20px;
+    }
+    .col{
+        padding-top: 10px;
+        alignment: center;
+        border-radius: 5px;
+        background-color: #B2BABB  ;
+        border-bottom-color: #F4F6F6 ;
+    }
+    .row{
+        padding-top: 10px;
+    }
+
+    span{
+        color:#FBFCFC;
+    }
+</style>
+</head>
+<body>
+    {% block content %}
+        <sectionn>
+            <div class="top" style="text-align: center">
+                <span><h1 class="display-4">Weather Details</h1><span>
+        </div></sectionn>
+
+        <section>
+        <form action="{% url 'index' %}" method="POST">
+            {% csrf_token %}
+             <div class="from" style="text-align: center">
+
+                <input  type="text" name="search"/>
+                <input type="submit" value="search"  name="submit">
+            </div>
+        </form>
+        </section>
+        <section class=" row justify-content-md-center">
+            <div class="col-sm-4 ">
+
+                <div class="{{ context.msg }}" style="text-align: center">
+                    <pre><h5>{{ context.message }}</h5></pre>
+    {#            {% for city in city_weather %}#}
+
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                    {% for city_weather in context.all_cities %}
+
+                        <div class="row justify-content-md-center">
+
+                            <div class="col col-sm-4 ">
+                                <a href="{% url 'delete_city' city_weather.name %}">
+                                    <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </a>
+
+                                <article class="media">
+                                    <div class="media-left">
+{#                                    <figure class="image is-50x50">#}
+                                        <img src="http://openweathermap.org/img/wn/{{ city_weather.icon }}.png" alt="image" class="rounded-lg">
+{#                                    </figure>#}
+                                    </div>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <span class="title" >{{ city_weather.name }}</span>
+                                                <br>
+                                                <span class="subtitle rounded-pill" >{{ city_weather.temperature }}°F</span>
+                                                <br><span >temperature from:<b>{{ city_weather.min_temp }}</b> to <b>{{ city_weather.max_temp }}°F </b></span>
+                                                <br> <span >{{ city_weather.description }}</span>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+            </div>
+
+        </section>
+    <footer class="footer">
+    </footer>
+{% endblock %}
+</body>
+</html>

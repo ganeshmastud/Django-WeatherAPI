@@ -1,0 +1,10 @@
+.nav{
+    background-color: rgba(20, 111, 199, 0.82);
+
+    padding: 15px;
+}
+.container{
+    border-color:black;
+    border-width: 2px;
+    alignment: center;
+}
