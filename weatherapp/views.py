@@ -22,7 +22,7 @@ def index(request):
             }
             return render(request,'index.html',{'context':context})
         if 'message' in r:
-            all_cities = City.objects.all().order_by('id')[::-1]
+            all_cities = City.objects.all()#.order_by('id')[::-1]
 
             context = {
                 'message': 'could not found city.',
@@ -56,7 +56,7 @@ def index(request):
                 city.description=city_weather['description']
                 city.icon=city_weather['icon']
                 city.save()
-                all_cities=City.objects.all().order_by('id')[::-1]
+                all_cities=City.objects.all()#.order_by('id')[::-1]
                 context={
                     'message':'successfully found city.',
                     'msg':'alert alert-success',
@@ -64,14 +64,14 @@ def index(request):
                 }
                 return render(request,'index.html',{'context':context})
             else:
-                all_cities = City.objects.all().order_by('id')[::-1]
+                all_cities = City.objects.all()#.order_by('id')[::-1]
                 context={
                     'message':'city already exists.',
                     'msg':"alert alert-danger",
                     'all_cities':all_cities
                 }
                 return render(request,'index.html',{'context':context})
-    all_cities = City.objects.all().order_by('id')[::-1]
+    all_cities = City.objects.all()#.order_by('id')[::-1]
     context = {
         'all_cities': all_cities
     }
