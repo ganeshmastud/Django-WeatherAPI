@@ -12,7 +12,7 @@ def index(request):
         r=requests.get(url.format(city)).json()
         print(r)
         if len(city)==0:
-            all_cities = City.objects.all().order_by('id')[::-1]
+            all_cities = City.objects.all()#.order_by('id')[::-1]
 
             context={
                 'message':'please enter something to search.',
