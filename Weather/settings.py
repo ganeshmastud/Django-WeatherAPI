@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
 from decouple import config
-from dj_database_url import parse as dburl
+import dj_database_url
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from django.conf.global_settings import DATABASES
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =os.environ.get('BLOG_KEY')
+SECRET_KEY ='hvw*&p1w4j0r*@8v5e*_cwsyj1*ms0#-o9=w^&+9yq156m#p6_' # os.environ.get('BLOG_KEY')
 
 #os.environ.get('BLOG_KEY')
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,15 +83,13 @@ WSGI_APPLICATION = 'Weather.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
-DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl), }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 
 # Password validation
@@ -131,5 +131,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'static'),
+]
+
+STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
