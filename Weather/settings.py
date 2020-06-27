@@ -14,7 +14,7 @@ import os
 import django_heroku
 from decouple import config
 import dj_database_url
-
+import whitenoise
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -136,5 +136,5 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
