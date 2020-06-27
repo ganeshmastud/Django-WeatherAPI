@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='city',
+            model_name='City',
             name='description',
             field=models.FloatField(default=False),
         ),

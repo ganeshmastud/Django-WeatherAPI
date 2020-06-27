@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='city',
+            model_name='City',
             name='icon',
             field=models.CharField(default=False, max_length=40),
         ),
